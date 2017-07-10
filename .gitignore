@@ -3,3 +3,6 @@
 .gnupg/
 .webtask
 .ash_history
+.node_repl_history
+node_modules
+package-lock.json
