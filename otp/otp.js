@@ -5,25 +5,25 @@ module.exports = function(context, cb) {
   var HOTP = OTP.hotp;
   var GA = OTP.googleAuthenticator;
   var response = '';
-  var secret = '';
+  var encoded_secret, secret = '';
 
-  if (typeof context.secrets.GAsecret !== 'undefined') {
-    secret = context.secrets.GAsecret
-    console.log("Got secret from webtask secret.")
+  if (typeof context.secrets.GAencsecret !== 'undefined') {
+    encoded_secret = context.secrets.GAencsecret
+    console.log("Got encoded secret from webtask secret.")
   } else if (typeof context.query['GApassword'] !== 'undefined') {
-    secret = GA.encode(context.query['GApassword']);
+    encoded_secret = GA.encode(context.query['GApassword']);
     console.log("Got password from query.")
-  } else if (typeof context.query['GAsecret'] !== 'undefined') {
-    secret = context.query['GAsecret'];
-    console.log("Got secret from query.")
+  } else if (typeof context.query['GAencsecret'] !== 'undefined') {
+    encoded_secret = context.query['GAencsecret'];
+    console.log("Got encoded secret from query.")
   } else {
-    secret = GA.encode('caramba!');
-    console.log("Using default password/secret from webtask code.")
+    encoded_secret = GA.encode('caramba!');
+    console.log("Using default secret from webtask code.")
   }
 
   try {
     // generate otp for base 32 encoded user secret
-    var code = GA.gen(secret);
+    var code = GA.gen(encoded_secret);
     var today = new Date();
     console.log('Code: ', code);
     cb(null, { code: code, date: today.toISOString() });
@@ -34,22 +34,6 @@ module.exports = function(context, cb) {
   }
 
 }
-
-exports.express = function (options, cb) {
-  options.nodejsCompiler(options.script, function (error, func) {
-    if (error) return cb(error);
-    try {
-      func = fromConnect(func); // this is where adaptation happens
-    }
-    catch (e) {
-      return cb(e);
-    }
-    return cb(null, func);
-  });
-};
-
-
-
 // Code Verification
 // try {
 //   // verify otp 'XXXXXX' for base 32 encoded user secret
@@ -78,11 +62,6 @@ exports.express = function (options, cb) {
 // catch(ex) {
 //   console.error(ex); // print error occurred during OTP verification process
 // }
-
-// Google Authenticator
-// get GoogleAuthenticator object
-// hardcode secret for console testing
-
 
 // // QRCode Generation
 // try {
