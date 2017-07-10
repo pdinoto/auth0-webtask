@@ -5,4 +5,4 @@ This repository holds some very-basic tests of *webtask* written using [Auth0 We
 
 It is far from ready for public consumption.
 
-Internal notes of what I am thinking are in 
+Internal notes of what I am thinking are [here](./webtask-notes.md)
