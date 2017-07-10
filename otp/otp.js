@@ -9,28 +9,31 @@ module.exports = function(context, cb) {
 
   if (typeof context.secrets.GAsecret !== 'undefined') {
     secret = context.secrets.GAsecret
-    console.log("Got secret from webtask.")
+    console.log("Got secret from webtask secret.")
+  } else if (typeof context.query['GApassword'] !== 'undefined') {
+    secret = GA.encode(context.query['GApassword']);
+    console.log("Got password from query.")
   } else if (typeof context.query['GAsecret'] !== 'undefined') {
-    secret = context.secrets.GAsecret
-    console.log("Got secret from webtask.")
+    secret = context.query['GAsecret'];
+    console.log("Got secret from query.")
   } else {
-    secret = 'caramba!';
+    secret = GA.encode('caramba!');
+    console.log("Using default password/secret from webtask code.")
   }
 
   try {
     // generate otp for base 32 encoded user secret
-    var code = GA.gen(GA.encode(secret));
+    var code = GA.gen(secret);
     var today = new Date();
+    console.log('Code: ', code);
     cb(null, { code: code, date: today.toISOString() });
-    console.log(code); // print otp result => 6-digit number
   }
   catch(ex) {
-    console.error(ex); // print error occurred during OTP generation process
+    console.error(ex);
+    cb(ex, { error: JSON.stringify(ex) });
   }
 
 }
-
-
 
 exports.express = function (options, cb) {
   options.nodejsCompiler(options.script, function (error, func) {
