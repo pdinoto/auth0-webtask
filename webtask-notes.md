@@ -1,15 +1,4 @@
 
-### Before we start
-
-Been suggested that a simple webtask concept could be done in a
-*couple of hours*
-
-Reality check:
-- I consider that I would only do this in just two hours if I have been using the tools, language and frameworks lately. Also, a concrete requirement (a story, maybe?) would help, as otherwise you need to add "creativity brew time" into the equation. And everybody knows creativity usually eludes any kind of strict time constrains.
-- I have not been coding lately, my last Javascript project was about two years ago, and was based on nodejs o a cuasi-embedded industrial setup.
-- I DO scripting work to setup and adapt existing scripts daily, mostly dealing with infrastructure, and this framework is quite different.
-- Webtask.io is clear to understand, but as any new tool requires some learning curve a lots of trial/error cycles. It is quite fun, though.
-
 ### Ideas
 The concepts I had in mind when getting into this were:
 - I wanted to come up with something that is actually useful, at least for me.
@@ -28,3 +17,13 @@ Things I had to (re)learn or investigate:
 - Hashing/hmac concepts, Base32 encoding (understand JS-OTP code) refresh in order to dissect the existing code and assess re-usability.
 - HOTP and TOTP concepts
 - Port knocking history, existing solutions
+
+### Self notes
+
+It been suggested that a simple webtask proof-of-concept could be written in a *couple of hours*
+
+In my case:
+- I consider that I would only do this in just two hours if I have been using the tools, language and frameworks lately. Also, a concrete requirement (a story, maybe?) would help, as otherwise you need to add "creativity brew time" into the equation. And everybody knows creativity usually eludes any kind of strict time constrains.
+- I have not been coding lately, my last Javascript project was about two years ago, and was based on nodejs o a cuasi-embedded industrial setup.
+- Webtask.io is clear to understand, but as any new tool requires some learning curve a lots of trial/error cycles. It is quite fun, though. Deep understanding of the model and components is required. Documentation is very good. Need more time. Worth it.
+- While I do write to setup and adapt existing scripts daily, mostly dealing with infrastructure, this framework is quite different. 
