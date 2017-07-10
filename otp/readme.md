@@ -1,7 +1,7 @@
 
 ### OTP webtask
 
-An attempt to have a webtask that given a series of a secret will provide a proper [TOPT](https://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm) code to be used as 2FA
+An attempt to have a webtask that given a proper secret in the form of a [Webtask secret](https://webtask.io/docs/issue_parameters) will provide a [TOPT](https://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm) code to be used as 2FA.
 
 Reviewed many Javascript TOTP libraries, settled with [github.com/njl07/otp.js](github.com/njl07/otp.js) since it very simple.
 
@@ -24,7 +24,6 @@ if you want the webtask to be permanently related to a particular account, then 
 ```
 auth0-webtask/otp $ wt create --name <choose-a-name> --secret GAencsecret=ZM5GA6GLI2OABWFO otp.js
 ```
-
 
 ### Usage
 
